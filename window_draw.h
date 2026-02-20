@@ -16,4 +16,6 @@ public:
 
 } /* window_draw */
 
+void CameraUpdate(Camera3D *camera);
+
 #endif /* _WINDOW_DRAW_H */

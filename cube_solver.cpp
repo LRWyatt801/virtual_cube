@@ -39,17 +39,17 @@ void cube_solver(void)
 static void game_loop(Camera3D camera, Vector3 cube_pos)
 {
 	// Update
-	UpdateCamera(&camera, CAMERA_CUSTOM);
+	CameraUpdate(&camera);
 
 	// Drawing
 	BeginDrawing();
-	ClearBackground(RAYWHITE);
-	BeginMode3D(camera);
+		ClearBackground(RAYWHITE);
+		BeginMode3D(camera);
 
-	DrawCube(cube_pos, 2.0f, 2.0f, 2.0f, RED);
-	DrawGrid(10, 1.0f);
+			DrawCube(cube_pos, 2.0f, 2.0f, 2.0f, RED);
+			DrawGrid(10, 1.0f);
 
-	EndMode3D();
+		EndMode3D();
 
 	EndDrawing();
 }
