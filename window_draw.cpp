@@ -1,8 +1,10 @@
 #include "window_draw.h"
+#include <rcamera.h>
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 #define FRAME_RATE 60
+#define CAMERA_MOUSE_MOVE_SENSITIVITY 0.003f
 
 namespace window_draw {
 
@@ -28,5 +30,9 @@ void window::close_window() {
 } // namespace window_draw
 
 void CameraUpdate(Camera3D *camera) {
-	
+	Vector2 mousePositionDelta = GetMouseDelta();
+	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+		CameraYaw(camera, -mousePositionDelta.x*CAMERA_MOUSE_MOVE_SENSITIVITY, true);
+        CameraPitch(camera, -mousePositionDelta.y*CAMERA_MOUSE_MOVE_SENSITIVITY, true, true, false);
+	}
 }
