@@ -29,8 +29,17 @@ void window::close_window() {
 
 } // namespace window_draw
 
+/**
+ * CameraUpdate - updates the camera based on mouse input
+ * @camera: pointer to the camera to update
+ * 
+ * Return: n/a
+ */
+
 void CameraUpdate(Camera3D *camera) {
 	Vector2 mousePositionDelta = GetMouseDelta();
+
+	// mouse support for camera movement
 	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
 		CameraYaw(camera, -mousePositionDelta.x*CAMERA_MOUSE_MOVE_SENSITIVITY, true);
         CameraPitch(camera, -mousePositionDelta.y*CAMERA_MOUSE_MOVE_SENSITIVITY, true, true, false);
