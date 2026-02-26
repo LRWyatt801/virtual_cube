@@ -4,7 +4,7 @@
 
 using namespace window_draw;
 
-static void game_loop (Camera3D, Vector3);
+static void game_loop (Camera3D *, Vector3);
 
 /**
 * cube_solver - core function for solving a virtual Rubik's cube
@@ -22,7 +22,7 @@ void cube_solver(void)
 	Vector3 cube_position = { 0.0f, 0.0f, 0.0f };
 
 	while(!WindowShouldClose())
-		game_loop(window.camera, cube_position);
+		game_loop(&window.camera, cube_position);
 
 	window.close_window();
 }
@@ -36,15 +36,15 @@ void cube_solver(void)
 * Return: n/a
 */
 
-static void game_loop(Camera3D camera, Vector3 cube_pos)
+static void game_loop(Camera3D *camera, Vector3 cube_pos)
 {
 	// Update
-	CameraUpdate(&camera);
+	CameraUpdate(camera);
 
 	// Drawing
 	BeginDrawing();
 		ClearBackground(RAYWHITE);
-		BeginMode3D(camera);
+		BeginMode3D(*camera);
 
 			DrawCube(cube_pos, 2.0f, 2.0f, 2.0f, RED);
 			DrawGrid(10, 1.0f);
