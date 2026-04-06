@@ -6,39 +6,59 @@ namespace cube {
 
     class block {
 
-        private:
         block_id id;
         Vector3 block_position;
 
         public:
-        block (block_id bid) : id(bid) {
-            
-        };
+        block (block_id bid) : id(bid) {};
+
+        /**
+         * decodeColorID: takes in a block_id and a color_bit and
+         *    returns true if the color_bit is present in the block_id,
+         *    false otherwise
+         * 
+         * @param id: the block_id to decode
+         * @param color_bit: the color_bit to check for
+         *
+         * @return: true if the color_bit is present in the block_id
+         *    false otherwise
+         */
+
+        bool decodeColorID(block_id id, block_id color_bit){
+            return (static_cast<int>(id) & static_cast<int>(color_bit)) != 0
+                    ? true : false;
+        }
     }; /* class block */
 
     class cube {
 
-    block_id block_ids[26] = {
-        // corners
-        block_id::RWG, block_id::RGY, block_id::RYB, block_id::RBW,
-        block_id::OWG, block_id::OGY, block_id::OYB, block_id::OBW,
-        // egdes
-        block_id::RW, block_id::RG, block_id::RY, block_id::RB,
-        block_id::WG, block_id::GY, block_id::YB, block_id::BW,
-        block_id::OW, block_id::OG, block_id::OY, block_id::OB,
-        // centers
-        block_id::R, block_id::O, block_id::W, block_id::G, block_id::Y, block_id::B
-    };
-
-    std::vector<block> blocks;
-
-    public:
-    cube() {
-        for (block_id block_id : block_ids) {
-            blocks.push_back(block(block_id));
+        block_id block_ids[26] = {
+            // corners
+            block_id::kRedWhiteGreen, block_id::kRedGreenYellow,
+            block_id::kRedYellowBlue, block_id::kRedBlueWhite,
+            block_id::kOrangeWhiteGreen, block_id::kOrangeGreenYellow,
+            block_id::kOrangeYellowBlue, block_id::kOrangeBlueWhite,
+            // egdes
+            block_id::kRedWhite, block_id::kRedGreen,
+            block_id::kRedYellow, block_id::kRedBlue,
+            block_id::kWhiteGreen, block_id::kGreenYellow,
+            block_id::kYellowBlue, block_id::kBlueWhite,
+            block_id::kOrangeWhite, block_id::kOrangeGreen,
+            block_id::kOrangeYellow, block_id::kOrangeBlue,
+            // centers
+            block_id::kRed, block_id::kOrange, block_id::kWhite,
+            block_id::kGreen, block_id::kYellow, block_id::kBlue
         };
 
-    };
+        std::vector<block> blocks;
+
+        public:
+        cube() {
+            for (block_id block_id : block_ids) {
+                blocks.push_back(block(block_id));
+            };
+
+        };
 
     }; /* class cube */
 
